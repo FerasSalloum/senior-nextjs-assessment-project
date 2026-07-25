@@ -16,3 +16,12 @@ export const ProjectSchema = z.object({
   description: z.string().optional(),
   onwerId: z.string().min(1, "Owner ID is required"),
 });
+export const TAsckSchema = z.object({
+  title: z.string().min(3, "The title must be at least two characters"),
+  description:z.string().optional(),
+  status:z.enum(["Todo","In Progress","Done"]),
+  priority:z.enum(["Low","Medium","High"]),
+  dueDate:z.date().optional(),
+  projectId:z.string().min(1,"Projec ID is required"),
+  assigneedId:z.string().optional(),
+});
