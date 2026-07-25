@@ -1,0 +1,61 @@
+datasource db {
+  provider  = "postgresql"
+  // url       = env("DATABASE_URL")
+  // directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+enum TaskStatus{
+  TODO
+  IN_PROGRESS
+  DONE
+}
+enum TaskPriority{
+    LOW
+    MEDIUM
+    HIGH
+}
+model Users{
+  id String @id @default(uuid())
+  name String
+  email String @unique
+  password String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  projects Project[] @relation("UserProjects")
+  assignedTasks Task[] @relation("AssignedTasks")
+  @@map("users")
+}
+model Project{
+  id String @id @default(uuid())
+  title String
+  description String?
+  ownerId String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  
+  owner Users @relation("UserProjects",fields: [ownerId],references: [id],onDelete:Cascade)
+  tasks Task[] @relation("ProjectsTasks")
+  @@map("projects")
+}
+model Task{
+  id String @id @default(uuid())
+  title String
+  description String?
+  status TaskStatus @default(TODO)
+  priroity TaskPriority @default(MEDIUM)
+  dueDate DateTime?
+  projectId String
+  assigneeId String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  projects Project @relation("ProjectsTasks",fields: [projectId],references: [id] ,onDelete:Cascade )
+  assignee Users? @relation("AssignedTasks",fields: [assigneeId],references: [id],onDelete: Cascade)
+  @@map("tasks")
+}
+
+
