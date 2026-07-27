@@ -8,3 +8,4 @@ export interface IUserRepository {
     password: string;
   }): Promise<Users>;
 }
+   

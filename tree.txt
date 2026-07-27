@@ -1,0 +1,52 @@
+senior-nextjs-assessment-project
+├── README.md
+├── package-lock.json
+├── package.json
+├── project
+│   ├── AGENTS.md
+│   ├── CLAUDE.md
+│   ├── README.md
+│   ├── app
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── eslint.config.mjs
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.mjs
+│   ├── prisma
+│   │   └── schema.prisma
+│   ├── prisma.config.ts
+│   ├── public
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── skills-lock.json
+│   ├── src
+│   │   ├── app
+│   │   │   └── api
+│   │   │       └── projects
+│   │   │           └── route.ts
+│   │   ├── domain
+│   │   │   ├── repositories
+│   │   │   │   ├── IProjectRepository.ts
+│   │   │   │   ├── ITaskRepository copy.ts
+│   │   │   │   └── IUserRepository.ts
+│   │   │   └── service
+│   │   │       ├── AuthService.ts
+│   │   │       ├── ProjectService.ts
+│   │   │       └── TaskService.ts
+│   │   ├── infrastructure
+│   │   │   └── repositories
+│   │   │       ├── PrismaProjectRepository .ts
+│   │   │       ├── PrismaTaskRepository copy.ts
+│   │   │       └── PrismaUserRepository.ts
+│   │   ├── lib
+│   │   │   └── prisma.ts
+│   │   └── validators
+│   │       └── schemas.ts
+│   ├── tree.txt
+│   └── tsconfig.json
+└── tree.txt

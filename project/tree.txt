@@ -1,0 +1,48 @@
+Need to install the following packages:
+tree-node-cli@3.0.0
+Ok to proceed? (y) 
+project
+├── AGENTS.md
+├── CLAUDE.md
+├── README.md
+├── app
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── prisma
+│   └── schema.prisma
+├── prisma.config.ts
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── skills-lock.json
+├── src
+│   ├── domain
+│   │   ├── repositories
+│   │   │   ├── IProjectRepository.ts
+│   │   │   ├── ITaskRepository copy.ts
+│   │   │   └── IUserRepository.ts
+│   │   └── service
+│   │       ├── AuthService.ts
+│   │       ├── ProjectService.ts
+│   │       └── TaskService.ts
+│   ├── infrastructure
+│   │   └── repositories
+│   │       ├── PrismaProjectRepository .ts
+│   │       ├── PrismaTaskRepository copy.ts
+│   │       └── PrismaUserRepository.ts
+│   ├── lib
+│   │   └── prisma.ts
+│   └── validators
+│       └── schemas.ts
+├── tree.txt
+└── tsconfig.json

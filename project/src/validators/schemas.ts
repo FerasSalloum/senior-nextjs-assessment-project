@@ -13,15 +13,15 @@ export const LoginSchema = z.object({
 });
 export const ProjectSchema = z.object({
   title: z.string().min(3, "The title must be at least 3 characters"),
+  ownerId: z.string().min(1, "Owner ID is required"),
   description: z.string().optional(),
-  onwerId: z.string().min(1, "Owner ID is required"),
 });
-export const TAsckSchema = z.object({
+export const TasckSchema = z.object({
   title: z.string().min(3, "The title must be at least two characters"),
-  description:z.string().optional(),
-  status:z.enum(["Todo","In Progress","Done"]),
-  priority:z.enum(["Low","Medium","High"]),
-  dueDate:z.date().optional(),
-  projectId:z.string().min(1,"Projec ID is required"),
-  assigneedId:z.string().optional(),
+  description: z.string().optional(),
+  status: z.enum(["TODO", "IN_PROGRESS", "DONE"]),
+  priroity: z.enum(["LOW", "MEDIUM", "HIGH"]),
+  dueDate: z.date().optional(),
+  projectId: z.string().min(1, "Project ID is required"),
+  assigneeId: z.string().optional(),
 });
