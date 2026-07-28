@@ -35,7 +35,12 @@ export class PrismaProjectRepository implements IProjectRepository {
   ): Promise<Project | null> {
     return await prisma.project.update({
       where: { id },
-      data,
+      data: {
+        ...(data.title !== undefined && { title: data.title }),
+        ...(data.description !== undefined && {
+          description: data.description,
+        }),
+      },
     });
   }
   async delete(id: string): Promise<void> {

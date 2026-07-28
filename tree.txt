@@ -1,7 +1,5 @@
 senior-nextjs-assessment-project
 ├── README.md
-├── package-lock.json
-├── package.json
 ├── project
 │   ├── AGENTS.md
 │   ├── CLAUDE.md
@@ -27,6 +25,13 @@ senior-nextjs-assessment-project
 │   ├── src
 │   │   ├── app
 │   │   │   └── api
+│   │   │       ├── auth
+│   │   │       │   ├── login
+│   │   │       │   │   └── route.ts
+│   │   │       │   ├── logout
+│   │   │       │   │   └── route.ts
+│   │   │       │   └── register
+│   │   │       │       └── route.ts
 │   │   │       └── projects
 │   │   │           └── route.ts
 │   │   ├── domain
