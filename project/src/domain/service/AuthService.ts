@@ -21,7 +21,7 @@ export class AuthService {
       throw new Error("Email already exists");
     }
     const salt = await bcrypt.genSalt(10);
-    const hashedPassword = await bcrypt.hash(data.passowrd, salt);
+    const hashedPassword = await bcrypt.hash(data.password, salt);
     const user = await this.userRepository.create({
       name: data.name,
       email: data.email,
@@ -37,7 +37,7 @@ export class AuthService {
       throw new Error("Invalid input values");
     }
     const validatePassword = await bcrypt.compare(
-      data.passowrd,
+      data.password,
       existingUser.password,
     );
     if (!validatePassword) {

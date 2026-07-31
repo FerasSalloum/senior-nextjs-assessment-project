@@ -1,0 +1,150 @@
+<!DOCTYPE html><html dir="rtl" lang="ar"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0" name="viewport"><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-container-highest":"#33343d","surface-container":"#1d1f28","surface-dim":"#11131b","on-background":"#e1e1ed","background":"#11131b","on-primary-container":"#00626e","on-error":"#690005","on-surface":"#e1e1ed","surface-container-low":"#191b23","secondary-fixed-dim":"#e9c349","tertiary":"#ffeac0","outline-variant":"#3b494c","on-secondary-fixed-variant":"#574500","tertiary-container":"#fec931","on-tertiary-fixed-variant":"#594400","inverse-primary":"#006875","secondary":"#e9c349","on-tertiary":"#3e2e00","on-surface-variant":"#bac9cc","on-secondary-fixed":"#241a00","tertiary-fixed-dim":"#f3bf26","surface":"#11131b","error-container":"#93000a","surface-tint":"#00daf3","on-tertiary-container":"#6f5500","on-primary":"#00363d","on-secondary-container":"#342800","inverse-on-surface":"#2e3039","surface-variant":"#33343d","inverse-surface":"#e1e1ed","outline":"#849396","error":"#ffb4ab","primary":"#c3f5ff","surface-container-lowest":"#0c0e16","surface-container-high":"#282a32","on-primary-fixed-variant":"#004f58","primary-container":"#00e5ff","primary-fixed-dim":"#00daf3","on-primary-fixed":"#001f24","surface-bright":"#373942","secondary-container":"#af8d11","on-tertiary-fixed":"#251a00","primary-fixed":"#9cf0ff","tertiary-fixed":"#ffdf96","on-error-container":"#ffdad6","secondary-fixed":"#ffe088","on-secondary":"#3c2f00"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{"md":"24px","gutter":"24px","margin-mobile":"16px","xs":"4px","xl":"80px","sm":"12px","lg":"48px","base":"8px","container-max":"1440px"},"fontFamily":{"headline-lg-mobile":["Inter"],"display-lg":["Inter"],"label-caps":["Inter"],"title-md":["Inter"],"body-sm":["Inter"],"headline-lg":["Inter"],"body-lg":["Inter"]},"fontSize":{"headline-lg-mobile":["24px",{"lineHeight":"1.3","fontWeight":"600"}],"display-lg":["48px",{"lineHeight":"1.2","letterSpacing":"-0.02em","fontWeight":"700"}],"label-caps":["12px",{"lineHeight":"1","letterSpacing":"0.05em","fontWeight":"600"}],"title-md":["20px",{"lineHeight":"1.5","fontWeight":"500"}],"body-sm":["14px",{"lineHeight":"1.5","fontWeight":"400"}],"headline-lg":["32px",{"lineHeight":"1.3","fontWeight":"600"}],"body-lg":["16px",{"lineHeight":"1.6","fontWeight":"400"}]}}}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"></head><body class="bg-background font-body-lg text-on-surface select-none"><header class="fixed top-0 w-full z-50 bg-surface-dim/80 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.1)] border-b border-outline-variant/30"><div class="h-20 w-full max-w-container-max mx-auto px-md flex items-center justify-between"><div class="flex items-center gap-base"><span class="text-primary font-display-lg text-headline-lg tracking-tight">JEST DOET</span></div><div class="flex items-center gap-md"><button class="p-base hover:bg-surface-container-high rounded-full transition-colors" onclick="document.getElementById('side-drawer').style.transform='translateX(0)'"><span class="material-symbols-outlined text-on-surface text-[28px]">menu</span></button></div></div></header><aside class="fixed inset-y-0 right-0 w-80 bg-surface-container-high shadow-xl z-[60] transition-transform translate-x-full duration-300 ease-in-out border-l border-outline-variant/30 flex flex-col" id="side-drawer"><div class="p-md flex justify-between items-center border-b border-outline-variant/20"><span class="font-title-md text-on-surface">الملف الشخصي</span><button class="p-xs hover:bg-surface-container-highest rounded-full transition-colors" onclick="document.getElementById('side-drawer').style.transform='translateX(100%)'"><span class="material-symbols-outlined">close</span></button></div><div class="p-md flex flex-col items-center text-center gap-base"><div class="w-20 h-20 rounded-full bg-primary flex items-center justify-center mb-base"><span class="material-symbols-outlined text-on-primary text-[40px]">person</span></div><div><div class="font-headline-lg text-title-md text-on-surface">أحمد محمد</div><div class="text-body-sm text-on-surface-variant">ahmed@example.com</div></div></div><nav class="flex-1 px-md py-lg flex flex-col gap-base"><a class="flex items-center gap-sm p-sm rounded-xl hover:bg-surface-container-highest transition-colors text-on-surface-variant hover:text-on-surface" data-path="dashboard" href="#"><span class="material-symbols-outlined">dashboard</span>الرئيسية</a><a class="flex items-center gap-sm p-sm rounded-xl hover:bg-surface-container-highest transition-colors text-on-surface-variant hover:text-on-surface" data-path="projects" href="#"><span class="material-symbols-outlined">folder</span>المشاريع</a><a class="flex items-center gap-sm p-sm rounded-xl hover:bg-surface-container-highest transition-colors text-on-surface-variant hover:text-on-surface" data-path="about" href="#"><span class="material-symbols-outlined">info</span>عن الموقع</a></nav><div class="p-md border-t border-outline-variant/20"><button class="w-full flex items-center justify-center gap-sm p-sm rounded-xl bg-error-container text-on-error-container hover:brightness-110 transition-all font-title-md"><span class="material-symbols-outlined">logout</span>تسجيل الخروج</button></div></aside><div class="fixed inset-0 bg-black/50 z-[55] opacity-0 pointer-events-none transition-opacity duration-300" id="drawer-overlay" onclick="document.getElementById('side-drawer').style.transform='translateX(100%)'"></div><main class="w-full pt-20 bg-background"><div class="flex flex-col w-full px-md max-w-container-max mx-auto py-xl gap-xl relative z-10">
+<div class="flex flex-col gap-sm">
+<h1 class="font-display-lg text-display-lg text-primary tracking-tight">إعداد العرض التقديمي للربع الأخير</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl leading-relaxed">
+            مراجعة جميع البيانات المالية والمبيعات للربع الأخير، وتجهيز الشرائح الخاصة بالأداء ومقارنتها بالأهداف السنوية المحددة.
+        </p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-lg mt-md relative">
+<!-- Status Section -->
+<div class="flex flex-col gap-md bg-surface-container p-md rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-colors shadow-lg">
+<div class="absolute inset-0 bg-gradient-to-br from-primary/5 to-transparent pointer-events-none"></div>
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-base">
+<span class="material-symbols-outlined text-primary text-[24px]">incomplete_circle</span>
+                 الحالة
+             </h2>
+<div class="flex flex-col gap-sm w-full" id="status-group">
+<button class="status-btn group/btn flex items-center justify-between p-sm rounded-xl bg-surface hover:bg-surface-bright transition-all w-full text-right" data-status="TODO">
+<span class="font-body-lg text-body-lg text-on-surface-variant group-hover/btn:text-on-surface transition-colors">قيد الانتظار</span>
+<span class="material-symbols-outlined text-outline-variant group-hover/btn:text-primary transition-colors radio-icon">radio_button_unchecked</span>
+</button>
+<button aria-selected="true" class="status-btn group/btn flex items-center justify-between p-sm rounded-xl bg-primary/10 transition-all w-full text-right shadow-sm" data-status="IN_PROGRESS">
+<span class="font-body-lg text-body-lg text-primary transition-colors font-medium">جاري التنفيذ</span>
+<span class="material-symbols-outlined text-primary transition-colors radio-icon" style="font-variation-settings: 'FILL' 1;">radio_button_checked</span>
+</button>
+<button class="status-btn group/btn flex items-center justify-between p-sm rounded-xl bg-surface hover:bg-surface-bright transition-all w-full text-right" data-status="DONE">
+<span class="font-body-lg text-body-lg text-on-surface-variant group-hover/btn:text-on-surface transition-colors">مكتمل</span>
+<span class="material-symbols-outlined text-outline-variant group-hover/btn:text-primary transition-colors radio-icon">radio_button_unchecked</span>
+</button>
+</div>
+</div>
+<!-- Priority Section -->
+<div class="flex flex-col gap-md bg-surface-container p-md rounded-2xl relative overflow-hidden group hover:bg-surface-container-high transition-colors shadow-lg">
+<div class="absolute top-0 right-0 w-32 h-32 bg-secondary/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none"></div>
+<h2 class="font-title-md text-title-md text-on-surface flex items-center gap-base">
+<span class="material-symbols-outlined text-secondary text-[24px]">flag</span>
+                 الأولوية
+             </h2>
+<div class="grid grid-cols-3 gap-sm w-full" id="priority-group">
+<button class="priority-btn flex flex-col items-center justify-center gap-sm p-sm rounded-xl bg-surface hover:bg-surface-bright transition-all" data-priority="LOW">
+<span class="w-8 h-1 rounded-full bg-outline-variant indicator transition-colors"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">منخفضة</span>
+</button>
+<button class="priority-btn flex flex-col items-center justify-center gap-sm p-sm rounded-xl bg-surface hover:bg-surface-bright transition-all" data-priority="MEDIUM">
+<span class="w-8 h-1 rounded-full bg-outline-variant indicator transition-colors"></span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase tracking-wider">متوسطة</span>
+</button>
+<button aria-selected="true" class="priority-btn flex flex-col items-center justify-center gap-sm p-sm rounded-xl bg-secondary/10 transition-all shadow-sm" data-priority="HIGH">
+<span class="w-8 h-1 rounded-full bg-secondary indicator transition-colors"></span>
+<span class="font-label-caps text-label-caps text-secondary font-semibold uppercase tracking-wider">عالية</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Save Button Section -->
+<div class="flex justify-end mt-xl pt-lg relative"><button class="group flex items-center gap-sm px-xl py-sm bg-error-container/10 border border-error-container/30 rounded-xl hover:bg-error-container/20 transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-error-container/50 relative overflow-hidden ml-md">
+    <div class="absolute inset-0 bg-white/0 group-hover:bg-white/5 transition-colors"></div>
+    <span class="font-title-md text-title-md text-error relative z-10 font-semibold">حذف المهمة</span>
+    <span class="material-symbols-outlined text-error relative z-10 transition-transform group-hover:scale-110">delete</span>
+</button>
+<button class="group flex items-center gap-sm px-xl py-sm bg-primary rounded-xl hover:brightness-110 transition-all shadow-md hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 relative overflow-hidden">
+<div class="absolute inset-0 bg-white/0 group-hover:bg-white/10 transition-colors"></div>
+<span class="font-title-md text-title-md text-on-primary relative z-10 font-semibold">حفظ التغييرات</span>
+<span class="material-symbols-outlined text-on-primary relative z-10 transition-transform group-hover:-translate-x-1">save</span>
+</button>
+</div>
+</div>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        // Status Toggle Logic
+        const statusBtns = document.querySelectorAll('.status-btn');
+        statusBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const currentBtn = e.currentTarget;
+                
+                // Reset all
+                statusBtns.forEach(b => {
+                    b.classList.remove('bg-primary/10', 'shadow-sm');
+                    b.classList.add('bg-surface', 'hover:bg-surface-bright');
+                    b.removeAttribute('aria-selected');
+                    
+                    const textSpan = b.querySelector('span:first-child');
+                    textSpan.classList.remove('text-primary', 'font-medium');
+                    textSpan.classList.add('text-on-surface-variant', 'group-hover/btn:text-on-surface');
+                    
+                    const icon = b.querySelector('.radio-icon');
+                    icon.textContent = 'radio_button_unchecked';
+                    icon.classList.remove('text-primary');
+                    icon.classList.add('text-outline-variant', 'group-hover/btn:text-primary');
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                });
+                
+                // Set active
+                currentBtn.classList.remove('bg-surface', 'hover:bg-surface-bright');
+                currentBtn.classList.add('bg-primary/10', 'shadow-sm');
+                currentBtn.setAttribute('aria-selected', 'true');
+                
+                const activeText = currentBtn.querySelector('span:first-child');
+                activeText.classList.remove('text-on-surface-variant', 'group-hover/btn:text-on-surface');
+                activeText.classList.add('text-primary', 'font-medium');
+                
+                const activeIcon = currentBtn.querySelector('.radio-icon');
+                activeIcon.textContent = 'radio_button_checked';
+                activeIcon.classList.remove('text-outline-variant', 'group-hover/btn:text-primary');
+                activeIcon.classList.add('text-primary');
+                activeIcon.style.fontVariationSettings = "'FILL' 1";
+            });
+        });
+
+        // Priority Toggle Logic
+        const priorityBtns = document.querySelectorAll('.priority-btn');
+        priorityBtns.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const currentBtn = e.currentTarget;
+                const priorityValue = currentBtn.dataset.priority;
+                
+                // Reset all
+                priorityBtns.forEach(b => {
+                    b.classList.remove('bg-secondary/10', 'shadow-sm');
+                    b.classList.add('bg-surface', 'hover:bg-surface-bright');
+                    b.removeAttribute('aria-selected');
+                    
+                    const indicator = b.querySelector('.indicator');
+                    indicator.classList.remove('bg-secondary');
+                    indicator.classList.add('bg-outline-variant');
+                    
+                    const textSpan = b.querySelector('span:last-child');
+                    textSpan.classList.remove('text-secondary', 'font-semibold');
+                    textSpan.classList.add('text-on-surface-variant');
+                });
+                
+                // Set active
+                currentBtn.classList.remove('bg-surface', 'hover:bg-surface-bright');
+                currentBtn.classList.add('bg-secondary/10', 'shadow-sm');
+                currentBtn.setAttribute('aria-selected', 'true');
+                
+                const activeIndicator = currentBtn.querySelector('.indicator');
+                activeIndicator.classList.remove('bg-outline-variant');
+                activeIndicator.classList.add('bg-secondary');
+                
+                const activeText = currentBtn.querySelector('span:last-child');
+                activeText.classList.remove('text-on-surface-variant');
+                activeText.classList.add('text-secondary', 'font-semibold');
+            });
+        });
+    });
+</script></main><footer class="w-full bg-surface-container-low py-lg mt-xl border-t border-outline-variant/20"><div class="max-w-container-max mx-auto px-md flex flex-col items-center gap-md"><nav class="flex gap-lg"><a class="text-body-lg text-on-surface-variant hover:text-primary transition-colors" data-path="dashboard" href="#">الرئيسية</a><a class="text-body-lg text-on-surface-variant hover:text-primary transition-colors" data-path="projects" href="#">المشاريع</a><a class="text-body-lg text-on-surface-variant hover:text-primary transition-colors" data-path="about" href="#">عن الموقع</a></nav><div class="text-body-sm text-outline font-label-caps">© 2024 JEST DOET. جميع الحقوق محفوظة.</div></div></footer><script>const drawer=document.getElementById('side-drawer');const overlay=document.getElementById('drawer-overlay');const observer=new MutationObserver((mutations)=>{mutations.forEach((m)=>{if(m.attributeName==='style'){const isClosed=drawer.style.transform==='translateX(100%)';overlay.style.opacity=isClosed?'0':'1';overlay.style.pointerEvents=isClosed?'none':'auto';}})});observer.observe(drawer,{attributes:true});</script>
+
+</body></html>

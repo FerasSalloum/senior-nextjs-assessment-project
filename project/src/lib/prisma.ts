@@ -1,7 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 
-// جلب رابط اتصال Supabase من ملف .env
 const connectionString = process.env.DATABASE_URL;
 
 const globalForPrisma = globalThis as unknown as {
@@ -9,7 +8,6 @@ const globalForPrisma = globalThis as unknown as {
 };
 
 const createPrismaClient = () => {
-  // إنشاء محول PG المطلوبة إجبارياً في Prisma 7
   const adapter = new PrismaPg({ connectionString });
 
   return new PrismaClient({
