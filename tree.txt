@@ -1,90 +1,48 @@
-senior-nextjs-assessment-project
+Need to install the following packages:
+tree-node-cli@3.0.0
+Ok to proceed? (y) 
+project
+├── AGENTS.md
+├── CLAUDE.md
 ├── README.md
-├── project
-│   ├── AGENTS.md
-│   ├── CLAUDE.md
-│   ├── README.md
-│   ├── app
-│   │   ├── favicon.ico
-│   │   ├── globals.css
-│   │   ├── layout.tsx
-│   │   └── page.tsx
-│   ├── eslint.config.mjs
-│   ├── package-lock.json
-│   ├── package.json
-│   ├── postcss.config.mjs
-│   ├── prisma
-│   │   └── schema.prisma
-│   ├── prisma.config.ts
-│   ├── public
-│   │   ├── file.svg
-│   │   ├── globe.svg
-│   │   ├── vercel.svg
-│   │   └── window.svg
-│   ├── skills-lock.json
-│   ├── src
-│   │   ├── app
-│   │   │   └── api
-│   │   │       ├── auth
-│   │   │       │   ├── login
-│   │   │       │   │   └── route.ts
-│   │   │       │   ├── logout
-│   │   │       │   │   └── route.ts
-│   │   │       │   └── register
-│   │   │       │       └── route.ts
-│   │   │       └── projects
-│   │   │           └── route.ts
-│   │   ├── domain
-│   │   │   ├── repositories
-│   │   │   │   ├── IProjectRepository.ts
-│   │   │   │   ├── ITaskRepository copy.ts
-│   │   │   │   └── IUserRepository.ts
-│   │   │   └── service
-│   │   │       ├── AuthService.ts
-│   │   │       ├── ProjectService.ts
-│   │   │       └── TaskService.ts
-│   │   ├── infrastructure
-│   │   │   └── repositories
-│   │   │       ├── PrismaProjectRepository .ts
-│   │   │       ├── PrismaTaskRepository copy.ts
-│   │   │       └── PrismaUserRepository.ts
-│   │   ├── lib
-│   │   │   └── prisma.ts
-│   │   └── validators
-│   │       └── schemas.ts
-│   ├── tree.txt
-│   └── tsconfig.json
-└── tree.txt
-
-
-
-
-src/
-├── app/                        # مجلد الصفحات والمسارات (Routing)
-│   ├── (auth)/                 # مجلد تجميعي (Route Group) لصفحات المصادقة
-│   │   ├── login/page.tsx      # صفحة تسجيل الدخول
-│   │   └── register/page.tsx   # صفحة إنشاء الحساب
-│   ├── projects/               
-│   │   └── [id]/page.tsx       # صفحة تفاصيل المشروع (Dynamic Route)
-│   ├── error.tsx               # صفحة الخطأ العامة (500 وغيرها)
-│   ├── not-found.tsx           # صفحة 404 (الصفحة غير موجودة)
-│   ├── layout.tsx              # القالب العام (يحتوي على الـ Header والـ Footer)
-│   └── page.tsx                # الصفحة الرئيسية (Dashboard - عرض المشاريع)
-│
-├── components/                 # مجلد المكونات (Components)
-│   ├── layout/                 # مكونات الهيكلة
-│   │   ├── Header.tsx
-│   │   └── Footer.tsx
-│   ├── ui/                     # مكونات الواجهة القابلة لإعادة الاستخدام
-│   │   ├── Button.tsx
-│   │   ├── Input.tsx
-│   │   ├── Modal.tsx           # النافذة المنبثقة
-│   │   └── Card.tsx
-│   ├── projects/               # مكونات خاصة بالمشاريع
-│   │   └── ProjectCard.tsx
-│   └── tasks/                  # مكونات خاصة بالمهام
-│       ├── TaskCard.tsx
-│       └── TaskFormModal.tsx   # نموذج تعديل المهمة داخل النافذة المنبثقة
-│
-└── hooks/                      # مجلد الـ Hooks المخصصة
-    └── useWarnIfUnsaved.ts     # هوك مخصص لتنبيه المستخدم قبل الخروج بدون حفظ
+├── app
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   └── page.tsx
+├── eslint.config.mjs
+├── next-env.d.ts
+├── next.config.ts
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── prisma
+│   └── schema.prisma
+├── prisma.config.ts
+├── public
+│   ├── file.svg
+│   ├── globe.svg
+│   ├── vercel.svg
+│   └── window.svg
+├── skills-lock.json
+├── src
+│   ├── domain
+│   │   ├── repositories
+│   │   │   ├── IProjectRepository.ts
+│   │   │   ├── ITaskRepository copy.ts
+│   │   │   └── IUserRepository.ts
+│   │   └── service
+│   │       ├── AuthService.ts
+│   │       ├── ProjectService.ts
+│   │       └── TaskService.ts
+│   ├── infrastructure
+│   │   └── repositories
+│   │       ├── PrismaProjectRepository .ts
+│   │       ├── PrismaTaskRepository copy.ts
+│   │       └── PrismaUserRepository.ts
+│   ├── lib
+│   │   └── prisma.ts
+│   └── validators
+│       └── schemas.ts
+├── tree.txt
+└── tsconfig.json
