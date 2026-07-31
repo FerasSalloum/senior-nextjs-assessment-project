@@ -1,4 +1,4 @@
-import { Project } from "@prisma/client";
+import type { Project } from "@prisma/client";
 export interface IProjectRepository {
   create(data: {
     title: string;
