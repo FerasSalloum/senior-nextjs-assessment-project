@@ -5,8 +5,8 @@ import "./globals.css";
 // import { Header } from "@/components/layout/Header";
 // import { Footer } from "@/components/layout/Footer";
 import ThemProvider from "@/src/components/ThemProvider"; // استدعاء المزود
-import Header from "../components/layout/Header";
-import Footer from "../components/layout/Footer";
+import Header from "../src/components/layout/Header";
+import Footer from "../src/components/layout/Footer";
 
 const cairo = Cairo({ subsets: ["arabic"] });
 
@@ -26,9 +26,9 @@ export default function RootLayout({
         className={`${cairo.className} min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200`}
       >
         <ThemProvider>
-          <Header/>
+          <Header />
           <main className="h-[calc(100vh-128px)] w-full">{children}</main>
-          <Footer/>
+          <Footer />
         </ThemProvider>
       </body>
     </html>
