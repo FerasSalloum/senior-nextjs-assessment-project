@@ -3,7 +3,7 @@ import {
   ITaskRepository,
 } from "@/src/domain/repositories/ITaskRepository";
 import { prisma } from "@/src/lib/prisma";
-import { Task } from "@prisma/client";
+import type { Task } from "@prisma/client";
 
 export class PrismaTaskRepsitroy implements ITaskRepository {
   async create(data: CreateTaskInput): Promise<Task> {
