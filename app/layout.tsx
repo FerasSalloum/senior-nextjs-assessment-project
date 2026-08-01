@@ -7,9 +7,10 @@ import "./globals.css";
 import ThemProvider from "@/src/components/ThemProvider"; // استدعاء المزود
 import Header from "../src/components/layout/Header";
 import Footer from "../src/components/layout/Footer";
+import { getCurrentUser } from "@/src/lib/getuser";
 
 const cairo = Cairo({ subsets: ["arabic"] });
-
+const user = await getCurrentUser()
 export const metadata: Metadata = {
   title: "نظام إدارة المهام الاحترافي",
   description: "تطبيق لتنظيم وتتبع المشاريع والمهام بكفاءة عالية",
@@ -26,7 +27,7 @@ export default function RootLayout({
         className={`${cairo.className} min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200`}
       >
         <ThemProvider>
-          <Header />
+          <Header initialUser={user}/>
           <main className="h-[calc(100vh-128px)] w-full">{children}</main>
           <Footer />
         </ThemProvider>

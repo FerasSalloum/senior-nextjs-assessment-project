@@ -7,12 +7,15 @@ import { useRouter } from "next/navigation";
 import axios from "axios";
 import MainButoon from "../UI/MainButoon";
 
-const Header = () => {
+const Header = ({
+  initialUser,
+}: {
+  initialUser: { name: string; email: string } | null;
+}) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>({
-    name: "feras salloum",
-    email: "feras@salloum.com",
-  });
+  const [user, setUser] = useState<{ name: string; email: string } | null>(
+    initialUser,
+  );
   const router = useRouter();
 
   const handelLogout = async () => {
@@ -81,27 +84,26 @@ const Header = () => {
               </div>
             </div>
             <div>
-                <Link
-                  href="/"
-                  onClick={() => {
-                    setSideBarOpen(false);
-                  }}
-                  className=""
-                >
-                  <MainButoon text="الرئيسية" icon={<LayoutDashboard/>}/>
-                  <span></span>
-                </Link>
-              
-                <Link
-                  href="/profile"
-                  onClick={() => {
-                    setSideBarOpen(false);
-                  }}
-                >
-                  <MainButoon text="الملف الشخصي" icon={<Settings/>}/>
-                  <span></span>
-                </Link>
-              
+              <Link
+                href="/"
+                onClick={() => {
+                  setSideBarOpen(false);
+                }}
+                className=""
+              >
+                <MainButoon text="الرئيسية" icon={<LayoutDashboard />} />
+                <span></span>
+              </Link>
+
+              <Link
+                href="/profile"
+                onClick={() => {
+                  setSideBarOpen(false);
+                }}
+              >
+                <MainButoon text="الملف الشخصي" icon={<Settings />} />
+                <span></span>
+              </Link>
             </div>
             <div
               className="p-4 border-t border-slate-800 bg-slate-950 cursor-pointer rounded-xl w-full flex items-center justify-center gap-2 text-red-400 hover:text-red-300 py-2-5 text-sm font-medium transition-colors mt-auto"

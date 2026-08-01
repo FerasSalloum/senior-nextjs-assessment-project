@@ -4,15 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 export const POST = async (request: NextRequest) => {
   try {
     const cookieStore = await cookies();
-    cookieStore.set({
-      name: "token",
-      value: "",
-      httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: "strict",
-      path: "/",
-      maxAge: 0,
-    });
+    cookieStore.delete("token");
+    cookieStore.delete("name");
+    cookieStore.delete("email");
     return NextResponse.json(
       { message: "logout successfull" },
       { status: 200 },
