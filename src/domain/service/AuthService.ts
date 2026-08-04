@@ -15,7 +15,7 @@ export class AuthService {
     this.userRepository = userRepository;
   }
 
-  async register(data: registerInput): Promise<{ user: Users; token: string }> {
+  async register(data: registerInput): Promise<Users> {
     const existingUser = await this.userRepository.findByEmail(data.email);
     if (existingUser) {
       throw new Error("Email already exists");
@@ -27,25 +27,26 @@ export class AuthService {
       email: data.email,
       password: hashedPassword,
     });
-    const token = this.generateToken(user.id);
-    return { user, token };
+    // const token = this.generateToken(user.id);
+    // return { user, token };
+    return user;
   }
 
-  async Login(data: loginInput): Promise<{ user: Users; token: string }> {
-    const existingUser = await this.userRepository.findByEmail(data.email);
-    if (!existingUser) {
+  async Login(data: loginInput): Promise<Users> {
+    const user = await this.userRepository.findByEmail(data.email);
+    if (!user) {
       throw new Error("Invalid input values");
     }
     const validatePassword = await bcrypt.compare(
       data.password,
-      existingUser.password,
+      user.password,
     );
     if (!validatePassword) {
       throw new Error("Invalid input values");
     }
-    const token = this.generateToken(existingUser.id);
-
-    return { user: existingUser, token };
+    // const token = this.generateToken(existingUser.id);
+    // return { user: existingUser, token };
+    return user;
   }
 
   private generateToken(userId: string): string {

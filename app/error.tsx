@@ -16,7 +16,7 @@ const Error = ({
   const errorStatusCode = error.statusCode || 500;
   const errorMessage = error.message || "حدث خطاء غير متوقع اثناء معالجة الطلب";
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center gap-5">
+    <div className="min-h-screen w-full h-full flex flex-col items-center justify-center gap-5 pt-32 -mt-32">
       <div className="w-full flex flex-col items-center justify-center gap-3">
         <h1 className="text-9xl sm:text-[11rem] font-bold text-red-900 tracking-wider select-none leading-none [text-shadow:15px_-15px_5px_#00b8db8f]">
           {errorStatusCode}

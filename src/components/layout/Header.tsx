@@ -1,32 +1,33 @@
 "use client";
 import { LayoutDashboard, LogOut, Menu, Settings, User } from "lucide-react";
-import { useState } from "react";
+import {  useState } from "react";
 import ThemeToggle from "../UI/ThemeToggle";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import axios from "axios";
 import MainButoon from "../UI/MainButoon";
+import { signOut } from "next-auth/react";
 
 const Header = ({
   initialUser,
 }: {
-  initialUser: { name: string; email: string } | null;
+  initialUser: {
+    name: string | null | undefined;
+    email: string | null | undefined;
+  } | null;
 }) => {
   const [sideBarOpen, setSideBarOpen] = useState(false);
-  const [user, setUser] = useState<{ name: string; email: string } | null>(
-    initialUser,
-  );
-  const router = useRouter();
+  const [user, setUser] = useState<{
+    name: string | null | undefined;
+    email: string | null | undefined;
+  } | null>(initialUser);
 
   const handelLogout = async () => {
     try {
-      const res = await axios.post("/api/auth/logout");
-      if (res.status == 200) {
-        setUser(null);
-        setSideBarOpen(false);
-        router.refresh();
-        router.push("/logout");
-      }
+      setSideBarOpen(false);
+      setUser(null);
+      await signOut({
+        callbackUrl: "/login",
+      });
+      window.location.href = "/login";
     } catch (error) {
       console.error(error);
     }

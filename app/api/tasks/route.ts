@@ -1,31 +1,18 @@
+
+import { auth } from "@/auth";
 import { TaskService } from "@/src/domain/service/TaskService";
 import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository copy";
 import { TaskSchema } from "@/src/validators/schemas";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 const taskRepository = new PrismaTaskRepsitroy();
 const taskService = new TaskService(taskRepository);
 
-const getUserIdFromToken = async (): Promise<string | null> => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  if (!token) return null;
-
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-      id: string;
-    };
-    return decoded.id;
-  } catch {
-    return null;
-  }
-};
 
 export const POST = async (request: NextRequest) => {
   try {
-    const userId = await getUserIdFromToken();
+    const session = await auth()
+    const userId =  session?.user?.id 
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -37,7 +24,8 @@ export const POST = async (request: NextRequest) => {
     if (typeof body === "string") {
       try {
         body = JSON.parse(body);
-      } catch {
+      } catch (error) {
+        console.log(error)
         return NextResponse.json(
           { error: "Invalid JSON format" },
           { status: 400 },
@@ -60,7 +48,7 @@ export const POST = async (request: NextRequest) => {
       { status: 201 },
     );
   } catch (error) {
-    console.error("❌ Error creating task:", error);
+    console.error( error);
     return NextResponse.json(
       { error: "Failed to create task" },
       { status: 500 },
@@ -70,17 +58,18 @@ export const POST = async (request: NextRequest) => {
 
 export const GET = async (request: NextRequest) => {
   try {
-    const userId = await getUserIdFromToken();
+    const session = await auth()
+    const userId =  session?.user?.id 
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
         { status: 401 },
       );
     }
-
+    
     const { searchParams } = new URL(request.url);
     const projectId = searchParams.get("projectId");
-
+    
     if (!projectId) {
       return NextResponse.json(
         { error: "projectId query parameter is required" },
@@ -91,7 +80,7 @@ export const GET = async (request: NextRequest) => {
     const tasks = await taskService.gitProjectTaske(projectId);
     return NextResponse.json({ tasks }, { status: 200 });
   } catch (error) {
-    console.error("❌ Error fetching tasks:", error);
+    console.error( error);
     return NextResponse.json(
       { error: "Failed to fetch tasks" },
       { status: 500 },

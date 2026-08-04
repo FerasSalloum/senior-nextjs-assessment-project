@@ -7,7 +7,7 @@ export interface IProjectRepository {
   }): Promise<Project>;
   findById(id: string): Promise<Project | null>;
   findByOwnerId(ownerId: string): Promise<Project[]>;
-  update(
+  update(  
     id: string,
     data: {
       title?: string;

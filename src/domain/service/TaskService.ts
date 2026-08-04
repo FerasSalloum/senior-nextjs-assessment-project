@@ -24,4 +24,7 @@ export class TaskService {
   async gitProjectTaske(projectId: string): Promise<Task[]> {
     return await this.taskRepository.findByProjectId(projectId);
   }
+  async deletTaske(projectId: string): Promise<void> {
+     await this.taskRepository.delete(projectId);
+  }
 }

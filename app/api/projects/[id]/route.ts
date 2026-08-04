@@ -1,28 +1,12 @@
+import { auth } from "@/auth";
 import { ProjectService } from "@/src/domain/service/ProjectService";
 import { PrismaProjectRepository } from "@/src/infrastructure/repositories/PrismaProjectRepository";
 import { UpdateProjectSchema } from "@/src/validators/schemas";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 const projrectRepositry = new PrismaProjectRepository();
 const projectService = new ProjectService(projrectRepositry);
 
-const getUserIdFromToken = async (): Promise<string | null> => {
-  const cookieStore = await cookies();
-  const token = cookieStore.get("token")?.value;
-  if (!token) {
-    return null;
-  }
-  try {
-    const decoded = jwt.verify(token, process.env.JWT_SECRET as string) as {
-      id: string;
-    };
-    return decoded.id;
-  } catch (error) {
-    return null;
-  }
-};
 type params = Promise<{ id: string }>;
 
 export const GET = async (
@@ -30,7 +14,8 @@ export const GET = async (
   { params }: { params: params },
 ) => {
   try {
-    const userId = await getUserIdFromToken();
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -47,7 +32,7 @@ export const GET = async (
     }
     return NextResponse.json({ project }, { status: 200 });
   } catch (error) {
-    console.error("❌ تفاصيل الخطأ الكاملة:", error);
+    console.error( error);
     if (error instanceof Error && error.message == "Project not found") {
       return NextResponse.json({ error: "Project not found" }, { status: 404 });
     }
@@ -60,7 +45,8 @@ export const PATCH = async (
   { params }: { params: params },
 ) => {
   try {
-    const userId = await getUserIdFromToken();
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -113,7 +99,7 @@ export const PATCH = async (
       { status: 200 },
     );
   } catch (error) {
-    console.error("❌ تفاصيل الخطأ الكاملة:", error);
+    console.error( error);
     return NextResponse.json(
       { error: "An error occurred while editing" },
       { status: 500 },
@@ -126,7 +112,8 @@ export const DELETE = async (
   { params }: { params: params },
 ) => {
   try {
-    const userId = await getUserIdFromToken();
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
