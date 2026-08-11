@@ -4,6 +4,8 @@ import { useState } from "react";
 import { EditIcon, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import LoadingOverlay from "./LoadingOverlay";
+import { toast } from "sonner";
 
 const EditProjectModal = ({projectId}:{projectId:string}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -23,13 +25,14 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
         description,
       });
       if (res.status === 201 || res.status === 200) {
+        toast.success("تم تعديل المشروع بنجاح")
         setIsOpen(false);
         setTitle("");
         setDescription("");
-
         router.refresh();
       }
     } catch (error) {
+      toast.error(String(error))
       console.error(error);
     } finally {
       setLoading(false);
@@ -38,6 +41,7 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
 
   return (
     <>
+        <LoadingOverlay isLoading={loading}/>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
@@ -48,15 +52,15 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
       </button>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
-          <div className="bg-[#131825] border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
+          <div className="dark:bg-[#131825] bg-white border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute left-4 top-4 text-slate-400 hover:text-white"
+              className="absolute left-4 top-4 dark:text-slate-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h2 className="text-xl font-bold text-white">تعديل المشروع </h2>
+            <h2 className="text-xl font-bold dark:text-white">تعديل المشروع </h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
@@ -68,7 +72,7 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl p-3 text-slate-100 text-sm focus:outline-none focus:border-cyan-500"
+                  className="w-full dark:bg-[#0B0F19] border border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none focus:border-cyan-500 placeholder-gray-400"
                   placeholder="مثال: تطوير المنصة"
                 />
               </div>
@@ -80,7 +84,7 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl p-3 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 h-24"
+                  className="w-full dark:bg-[#0B0F19] border border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none focus:border-cyan-500 h-24 placeholder-gray-400"
                   placeholder="وصف مختصر للمشروع..."
                 />
               </div>
@@ -89,7 +93,7 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 text-sm text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-sm dark:text-slate-400 dark:hover:text-white"
                 >
                   إلغاء
                 </button>

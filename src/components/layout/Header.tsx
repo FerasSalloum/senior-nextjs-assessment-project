@@ -5,6 +5,7 @@ import ThemeToggle from "../UI/ThemeToggle";
 import Link from "next/link";
 import MainButoon from "../UI/MainButoon";
 import { signOut } from "next-auth/react";
+import { toast } from "sonner";
 
 const Header = ({
   initialUser,
@@ -28,8 +29,10 @@ const Header = ({
         callbackUrl: "/login",
       });
       window.location.href = "/login";
+      toast.success("تم تسجيل الخروج بنجاح")
     } catch (error) {
       console.error(error);
+      toast.error(String(error))
     }
   };
   return (

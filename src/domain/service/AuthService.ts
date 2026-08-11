@@ -3,7 +3,6 @@ import { IUserRepository } from "../repositories/IUserRepository";
 import { LoginSchema, RegisterSchema } from "@/src/validators/schemas";
 import { Users } from "@prisma/client";
 import bcrypt from "bcryptjs";
-import jwt from "jsonwebtoken";
 
 type registerInput = z.infer<typeof RegisterSchema>;
 type loginInput = z.infer<typeof LoginSchema>;
@@ -47,10 +46,5 @@ export class AuthService {
     // const token = this.generateToken(existingUser.id);
     // return { user: existingUser, token };
     return user;
-  }
-
-  private generateToken(userId: string): string {
-    const secret = process.env.JWT_SECRET || "fallback_super_secret_key";
-    return jwt.sign({ id: userId }, secret, { expiresIn: "7d" });
   }
 }

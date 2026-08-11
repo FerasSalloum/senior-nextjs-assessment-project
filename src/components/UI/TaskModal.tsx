@@ -4,6 +4,8 @@ import { ArrowLeft, Flag, PieChart, X } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import DeleteTaskModal from "./DeleteTaskModal";
+import { toast } from "sonner";
+
 
 const TaskModal = ({
   task,
@@ -34,11 +36,13 @@ const TaskModal = ({
         status: selectedStatus,
       });
       if (res.status === 201 || res.status === 200) {
+        toast.success("تم تعديل المهمة بنجاح")
         setIsOpen(false);
         setSelectedStatus("TODO");
         router.refresh();
       }
     } catch (error) {
+      toast.error(String(error))
       console.error(error);
     } finally {
       setLoading(false);
@@ -48,13 +52,13 @@ const TaskModal = ({
   return (
     <>
       <div
-        className={`bg-[#131825] border border-slate-800/80 rounded-xl p-5 flex flex-col justify-between h-36 transition-all hover:border-slate-700/80 relative group`}
+        className={`dark:bg-[#131825] border dark:border-slate-800/80 rounded-xl p-5 flex flex-col justify-between h-36 transition-all hover:border-slate-700/80 relative group cursor-pointer`}
         onClick={() => {
           setIsOpen(true);
         }}
       >
         <div className="flex items-start justify-between gap-3 mb-2.5">
-          <h3 className={`text-sm font-semibold text-slate-200 line-clamp-2 `}>
+          <h3 className={`text-sm font-semibold dark:text-slate-200 line-clamp-2 `}>
             {task.title}
           </h3>
           <ArrowLeft className="w-4 h-4 shrink-0" />
@@ -199,22 +203,22 @@ const TaskModal = ({
 
       {isOpen && (
         <div className="fixed overflow-y-scroll  max-h-screen inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm pt-36 pb-2.5">
-          <div className="bg-[#131825] border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
+          <div className="dark:bg-[#131825] bg-white border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute left-4 top-4 text-slate-400 hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
-            <h2 className="text-xl font-bold text-white">تعديل حالة المهمة</h2>
+            <h2 className="text-xl font-bold dark:text-white">تعديل حالة المهمة</h2>
             <form onSubmit={handleSubmit} className="space-y-4">
               <div
                 dir="rtl"
                 className="bg-transparent max-w-lg w-full space-y-5"
               >
-                <div className="flex items-center justify-start gap-2 text-slate-100">
+                <div className="flex items-center justify-start gap-2 dark:text-slate-100">
                   <PieChart className="w-5 h-5 text-cyan-300 " />
-                  <h3 className="text-md font-bold">الحالة</h3>
+                  <h3 className="text-md font-bold ">الحالة</h3>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
                   <button

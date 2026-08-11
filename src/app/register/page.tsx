@@ -5,12 +5,16 @@ import Link from "next/link";
 import { User, Mail, Lock, Eye, EyeOff, ArrowLeft } from "lucide-react";
 import axios from "axios";
 import { signIn } from "next-auth/react";
+import LoadingOverlay from "@/src/components/UI/LoadingOverlay";
+import { toast } from "sonner";
+
 
 export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
   const handelRegister = async () => {
     const user = {
       name,
@@ -18,6 +22,7 @@ export default function RegisterPage() {
       password,
     };
     try {
+      setIsLoading(true)
       const res = await axios.post("/api/auth/register", user);
       if (res.status == 201) {
         const loginResult = await signIn("credentials", {
@@ -26,17 +31,24 @@ export default function RegisterPage() {
           redirect: false,
         });
         if (loginResult?.error) {
+          toast.error(loginResult.error)
           console.log(loginResult?.error);
         } else {
+          toast.success("تم تسجيل الدخول بنجاح")
           window.location.href = "/";
         }
       }
     } catch (error) {
+      toast.error(String(error))
       console.log(error);
+    }finally{
+      setIsLoading(false)
     }
   };
   return (
-    <div className=" min-h-screen flex flex-col items-center justify-center p-10 bg-[#0B0F19] scroll-auto">
+    <>
+    <LoadingOverlay isLoading={isLoading}/>
+    <div className=" min-h-screen flex flex-col items-center justify-center p-10 dark:bg-[#0B0F19] scroll-auto">
       <div className="mb-8 flex flex-col items-center text-center">
         <div className="w-16 h-16 bg-[#131825] border border-slate-800 rounded-2xl flex items-center justify-center mb-5 shadow-lg">
           <span className="text-cyan-400 font-black text-[10px] tracking-widest leading-tight text-center">
@@ -45,12 +57,12 @@ export default function RegisterPage() {
             DOET
           </span>
         </div>
-        <h1 className="text-2xl font-bold text-slate-100 mb-2">انشاء حساب</h1>
-        <p className="text-sm text-slate-400">
+        <h1 className="text-2xl font-bold dark:text-slate-100 mb-2">انشاء حساب</h1>
+        <p className="text-sm dark:text-slate-400">
           مرحباً بك في منصة المهام الفاخرة
         </p>
       </div>
-      <div className="w-full max-w-md bg-[#131825]/90 border border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
+      <div className="w-full max-w-md dark:bg-[#131825]/90 border dark:border-slate-800/80 rounded-3xl p-6 sm:p-8 shadow-2xl backdrop-blur-sm">
         <form
           className="space-y-5"
           onSubmit={(e) => {
@@ -59,17 +71,17 @@ export default function RegisterPage() {
           }}
         >
           <div className="space-y-2">
-            <label className="block text-xs font-semibold text-slate-400 text-right px-1">
+            <label className="block text-xs font-semibold dark:text-slate-400 text-right px-1">
               الاسم
             </label>
-            <div className="relative flex items-center bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
-              <div className="absolute right-4 text-slate-500 pointer-events-none">
+            <div className="relative flex items-center dark:bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
+              <div className="absolute right-4 dark:text-slate-500 pointer-events-none">
                 <User className="w-4 h-4" />
               </div>
               <input
                 type="text"
                 placeholder="الاسم الكامل"
-                className="w-full bg-transparent py-3.5 pr-11 pl-4 text-sm text-slate-200 placeholder-slate-500 outline-none text-right"
+                className="w-full bg-transparent py-3.5 pr-11 pl-4 text-sm dark:text-slate-200 placeholder-slate-500 outline-none text-right"
                 value={name}
                 onChange={(e) => {
                   setName(e.target.value);
@@ -78,18 +90,18 @@ export default function RegisterPage() {
             </div>
           </div>
           <div className="space-y-2">
-            <label className="block text-xs font-semibold text-slate-400 text-right px-1">
+            <label className="block text-xs font-semibold dark:text-slate-400 text-right px-1">
               الايميل
             </label>
-            <div className="relative flex items-center bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
-              <div className="absolute right-4 text-slate-500 pointer-events-none">
+            <div className="relative flex items-center dark:bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
+              <div className="absolute right-4 dark:text-slate-500 pointer-events-none">
                 <Mail className="w-4 h-4" />
               </div>
               <input
                 type="email"
                 placeholder="name@company.com"
                 dir="ltr"
-                className="w-full bg-transparent py-3.5 pl-4 pr-11 text-sm text-slate-200 placeholder-slate-500 outline-none text-left"
+                className="w-full bg-transparent py-3.5 pl-4 pr-11 text-sm dark:text-slate-200 placeholder-slate-500 outline-none text-left"
                 value={email}
                 onChange={(e) => {
                   setEmail(e.target.value);
@@ -98,11 +110,11 @@ export default function RegisterPage() {
             </div>
           </div>
           <div className="space-y-2 pb-2">
-            <label className="block text-xs font-semibold text-slate-400 text-right px-1">
+            <label className="block text-xs font-semibold dark:text-slate-400 text-right px-1">
               كلمة المرور
             </label>
-            <div className="relative flex items-center bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
-              <div className="absolute right-4 text-slate-500 pointer-events-none">
+            <div className="relative flex items-center dark:bg-[#1A202C] rounded-xl border border-slate-800 focus-within:border-cyan-500/50 transition-colors overflow-hidden">
+              <div className="absolute right-4 dark:text-slate-500 pointer-events-none">
                 <Lock className="w-4 h-4" />
               </div>
               <input
@@ -141,11 +153,12 @@ export default function RegisterPage() {
         <span className="text-slate-400">لديك حساب بالفعل؟ </span>
         <Link
           href="/login"
-          className="text-white hover:text-cyan-400 transition-colors"
+          className="dark:text-white hover:text-cyan-400 transition-colors"
         >
           سجل الان
         </Link>
       </div>
     </div>
+    </>
   );
 }

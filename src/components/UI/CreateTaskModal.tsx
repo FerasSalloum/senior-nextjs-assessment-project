@@ -4,6 +4,9 @@ import { useState } from "react";
 import { Flag, Plus, X, PieChart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import LoadingOverlay from "./LoadingOverlay";
+import { toast } from "sonner";
+
 
 const CreateTaskModal = ({
   projectId,
@@ -16,13 +19,13 @@ const CreateTaskModal = ({
   const [title, setTitle] = useState("");
   const [date, setDate] = useState("");
   const [description, setDescription] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isloading, setIsLoading] = useState(false);
   const [selectedPriority, setSelectedPriority] = useState("MEDIUM");
   const [selectedStatus, setSelectedStatus] = useState("TODO");
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
+    setIsLoading(true);
     try {
       const res = await axios.post(`/api/project/${projectId}/task`, {
         title: title,
@@ -40,33 +43,36 @@ const CreateTaskModal = ({
         setDate("");
         setSelectedPriority("MEDIUM");
         setSelectedStatus("TODO");
+        toast.success("تم انشاء المهمة بنجاح")
         router.refresh();
       }
     } catch (error) {
       console.error(error);
+      toast.error(String(error))
     } finally {
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
   return (
     <>
+    <LoadingOverlay isLoading={isloading}/>
       <button
         type="button"
         onClick={() => setIsOpen(true)}
         className="group min-h-30 dark:bg-[#131825]/40 border-2 border-dashed dark:border-slate-800/80 dark:hover:border-cyan-500/40 rounded-2xl p-6 transition-all duration-200 flex flex-col items-center justify-center text-center cursor-pointer dark:hover:bg-[#131825]/80 w-full"
       >
-        <div className="w-12 h-12 bg-[#1A202C] border border-slate-700/60 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-cyan-500/50 text-slate-400 group-hover:text-cyan-400 transition-all">
+        <div className="w-12 h-12 dark:bg-[#1A202C] border dark:border-slate-700/60 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-cyan-500/50 dark:text-slate-400 group-hover:text-cyan-400 transition-all">
           <Plus className="w-6 h-6" />
         </div>
-        <h3 className="text-sm font-bold text-slate-200 mb-1 group-hover:text-cyan-300 transition-colors">
+        <h3 className="text-sm font-bold dark:text-slate-200 mb-1 group-hover:text-cyan-300 transition-colors">
           إنشاء مهمة جديد
         </h3>
       </button>
 
       {isOpen && (
         <div className="fixed overflow-y-scroll  max-h-screen inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm pt-36 pb-2.5">
-          <div className="dark:bg-[#131825] border dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
+          <div className="dark:bg-[#131825] bg-white border dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
             <button
               onClick={() => setIsOpen(false)}
               className="absolute left-4 top-4 dark:text-slate-400 dark:hover:text-white"
@@ -194,7 +200,7 @@ const CreateTaskModal = ({
                 dir="rtl"
                 className="bg-transparent max-w-lg w-full space-y-5"
               >
-                <div className="flex items-center justify-start gap-2 text-slate-100">
+                <div className="flex items-center justify-start gap-2 dark:text-slate-100">
                   <Flag className="w-5 h-5 text-amber-400 fill-amber-400/20" />
                   <h3 className="text-md font-bold">الأولوية</h3>
                 </div>
@@ -288,23 +294,22 @@ const CreateTaskModal = ({
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full scheme-dark dark:bg-[#0B0F19] text-left border dark:border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none dark:focus:border-cyan-500"
+                  className="w-full scheme-dark dark:bg-[#0B0F19] text-left border dark:border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none dark:focus:border-cyan-500 placeholder-gray-300"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">
                 <button
                   type="button"
                   onClick={() => setIsOpen(false)}
-                  className="px-4 py-2 text-sm text-slate-400 hover:text-white"
+                  className="px-4 py-2 text-sm dark:text-slate-400 dark:hover:text-white"
                 >
                   إلغاء
                 </button>
                 <button
                   type="submit"
-                  disabled={loading}
                   className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-sm transition-all disabled:opacity-50"
                 >
-                  {loading ? "جاري الحفظ..." : "حفظ المهمة"}
+                  حفظ المهمة
                 </button>
               </div>
             </form>

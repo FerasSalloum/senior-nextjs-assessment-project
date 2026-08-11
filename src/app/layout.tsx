@@ -5,6 +5,8 @@ import ThemProvider from "@/src/components/ThemProvider"; // استدعاء ال
 import Header from "../components/layout/Header";
 import Footer from "../components/layout/Footer";
 import { auth } from "@/auth";
+import { SessionProvider } from "next-auth/react";
+import { Toaster } from "sonner";
 
 const cairo = Cairo({ subsets: ["arabic"] });
 export const metadata: Metadata = {
@@ -25,11 +27,16 @@ export default async function RootLayout({
       <body
         className={`${cairo.className} min-h-screen flex flex-col bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 transition-colors duration-200 scroll-smooth `}
       >
-        <ThemProvider>
-          <Header initialUser={initialUser} />
-          <main className="flex-1 w-full flex flex-col">{children}</main>
-          <Footer />
-        </ThemProvider>
+        <SessionProvider>
+          <ThemProvider>
+            <Header initialUser={initialUser} />
+            <main className="flex-1 w-full flex flex-col">
+              {children}
+              <Toaster position="top-center" richColors closeButton />
+            </main>
+            <Footer />
+          </ThemProvider>
+        </SessionProvider>
       </body>
     </html>
   );
