@@ -19,7 +19,7 @@ const TaskModal = ({
     priroity: string;
     dueDate: Date | null;
     projectId: string;
-    assigneedId: string | null;
+    assigneeId: string | null;
   };
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,7 +41,7 @@ const TaskModal = ({
         projectId: task.projectId,
         descriptionc: description,
         dueDate: date,
-        assigneedId: task.assigneedId,
+        assigneeId: task.assigneeId,
       });
       if (res.status === 201 || res.status === 200) {
         setIsOpen(false);

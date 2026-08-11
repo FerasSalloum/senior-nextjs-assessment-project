@@ -31,7 +31,7 @@ const CreateTaskModal = ({
         projectId: projectId,
         descriptionc: description,
         dueDate: date,
-        assigneedId: assigneeId,
+        assigneeId: assigneeId,
       });
       if (res.status === 201 || res.status === 200) {
         setIsOpen(false);
