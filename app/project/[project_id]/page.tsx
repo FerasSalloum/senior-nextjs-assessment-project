@@ -1,10 +1,6 @@
 import {
-  User,
-  ArrowLeft,
-  CheckCircle2,
   ListTodo,
   } from "lucide-react";
-import Link from "next/link";
 import CreateTaskModal from "@/src/components/UI/CreateTaskModal";
 import { auth } from "@/auth";
 import { PrismaProjectRepository } from "@/src/infrastructure/repositories/PrismaProjectRepository";

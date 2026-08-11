@@ -54,7 +54,7 @@ const CreateTaskModal = ({
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="group min-h-30 bg-[#131825]/40 border-2 border-dashed border-slate-800/80 hover:border-cyan-500/40 rounded-2xl p-6 transition-all duration-200 flex flex-col items-center justify-center text-center cursor-pointer hover:bg-[#131825]/80 w-full"
+        className="group min-h-30 dark:bg-[#131825]/40 border-2 border-dashed dark:border-slate-800/80 dark:hover:border-cyan-500/40 rounded-2xl p-6 transition-all duration-200 flex flex-col items-center justify-center text-center cursor-pointer dark:hover:bg-[#131825]/80 w-full"
       >
         <div className="w-12 h-12 bg-[#1A202C] border border-slate-700/60 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 group-hover:border-cyan-500/50 text-slate-400 group-hover:text-cyan-400 transition-all">
           <Plus className="w-6 h-6" />
@@ -66,19 +66,19 @@ const CreateTaskModal = ({
 
       {isOpen && (
         <div className="fixed overflow-y-scroll  max-h-screen inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm pt-36 pb-2.5">
-          <div className="bg-[#131825] border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
+          <div className="dark:bg-[#131825] border dark:border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute left-4 top-4 text-slate-400 hover:text-white"
+              className="absolute left-4 top-4 dark:text-slate-400 dark:hover:text-white"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <h2 className="text-xl font-bold text-white">إضافة مهمة جديد</h2>
+            <h2 className="text-xl font-bold dark:text-white">إضافة مهمة جديد</h2>
 
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
+                <label className="block text-xs font-medium dark:text-slate-400 mb-1">
                   اسم المهمة
                 </label>
                 <input
@@ -86,18 +86,18 @@ const CreateTaskModal = ({
                   required
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
-                  className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl p-3 text-slate-100 text-sm focus:outline-none focus:border-cyan-500"
+                  className="w-full dark:bg-[#0B0F19] border dark:border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none dark:focus:border-cyan-500"
                   placeholder="عنوان المهمة "
                 />
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
+                <label className="block text-xs font-medium dark:text-slate-400 mb-1">
                   الوصف
                 </label>
                 <textarea
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="w-full bg-[#0B0F19] border border-slate-800 rounded-xl p-3 text-slate-100 text-sm focus:outline-none focus:border-cyan-500 h-24"
+                  className="w-full dark:bg-[#0B0F19] border dark:border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none dark:focus:border-cyan-500 h-24"
                   placeholder="وصف مختصر للمهمة..."
                 />
               </div>
@@ -105,8 +105,8 @@ const CreateTaskModal = ({
                 dir="rtl"
                 className="bg-transparent max-w-lg w-full space-y-5"
               >
-                <div className="flex items-center justify-start gap-2 text-slate-100">
-                  <PieChart className="w-5 h-5 text-cyan-300 " />
+                <div className="flex items-center justify-start gap-2 dark:text-slate-100">
+                  <PieChart className="w-5 h-5 dark:text-cyan-300 " />
                   <h3 className="text-md font-bold">الحالة</h3>
                 </div>
                 <div className="grid grid-cols-3 gap-3">
@@ -280,7 +280,7 @@ const CreateTaskModal = ({
                 </div>
               </div>
               <div>
-                <label className="block text-xs font-medium text-slate-400 mb-1">
+                <label className="block text-xs font-medium dark:text-slate-400 mb-1">
                   تاريخ الانتهاء
                 </label>
                 <input
@@ -288,7 +288,7 @@ const CreateTaskModal = ({
                   type="date"
                   value={date}
                   onChange={(e) => setDate(e.target.value)}
-                  className="w-full scheme-dark bg-[#0B0F19] text-left border border-slate-800 rounded-xl p-3 text-slate-100 text-sm focus:outline-none focus:border-cyan-500"
+                  className="w-full scheme-dark dark:bg-[#0B0F19] text-left border dark:border-slate-800 rounded-xl p-3 dark:text-slate-100 text-sm focus:outline-none dark:focus:border-cyan-500"
                 />
               </div>
               <div className="flex justify-end gap-3 pt-2">

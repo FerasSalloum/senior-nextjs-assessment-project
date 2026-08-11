@@ -15,16 +15,16 @@ export const Project = async ({ project }: { project: ProjectProbs }) => {
   return (
     <Link
     href={`project/${project.id}`}
-      className="group relative bg-[#131825]/90 border border-slate-800/80 hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-200 flex flex-col justify-start shadow-lg overflow-hidden cursor-pointer"
+      className="group relative dark:bg-[#131825]/90 border dark:border-slate-800/80 dark:hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-200 flex flex-col justify-start shadow-lg overflow-hidden cursor-pointer"
     >
-      <h3 className="text-base font-bold text-slate-100 mb-1">
+      <h3 className="text-base font-bold dark:text-slate-100 mb-1">
         {project.title}
       </h3>
-      <p className="text-xs text-slate-400 mb-6 line-clamp-2">
+      <p className="text-xs dark:text-slate-400 mb-6 line-clamp-2">
         {project.description}
       </p>
-      <div className="space-y-3 pt-2 border-t border-slate-800/50">
-        <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
+      <div className="space-y-3 pt-2 border-t dark:border-slate-800/50">
+        <span className="text-[11px] font-semibold dark:text-slate-500 uppercase tracking-wider block">
           المهام السارية
         </span>
 

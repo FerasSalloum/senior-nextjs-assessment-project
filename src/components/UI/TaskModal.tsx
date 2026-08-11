@@ -23,32 +23,18 @@ const TaskModal = ({
   };
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [title, setTitle] = useState("");
-  const [date, setDate] = useState("");
-  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
-  const [selectedPriority, setSelectedPriority] = useState("MEDIUM");
   const [selectedStatus, setSelectedStatus] = useState("TODO");
   const router = useRouter();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`/api/project/${task.projectId}/task`, {
-        title: title,
+      const res = await axios.patch(`/api/project/${task.projectId}/task/${task.id}`, {
         status: selectedStatus,
-        priroity: selectedPriority,
-        projectId: task.projectId,
-        descriptionc: description,
-        dueDate: date,
-        assigneeId: task.assigneeId,
       });
       if (res.status === 201 || res.status === 200) {
         setIsOpen(false);
-        setTitle("");
-        setDescription("");
-        setDate("");
-        setSelectedPriority("MEDIUM");
         setSelectedStatus("TODO");
         router.refresh();
       }

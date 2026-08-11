@@ -1,27 +1,36 @@
-"use client"
 
+"use client";
+
+import { useState} from "react";
 import { Moon, Sun } from "lucide-react";
-import { useTheme } from "next-themes"
+import { useTheme } from "next-themes";
+
 const ThemeToggle = () => {
-    const {theme,setTheme}=useTheme();
-    const isDark = theme === "dark"
-    const toggleTheme = ()=>{
-        setTheme(isDark?"ligth":"dark")
-    }
+  const { setTheme, resolvedTheme } = useTheme();
+  const [mounted, ] = useState(true);
+  if (!mounted) {
+    return <div className="w-9 h-9" />;
+  }
+
+  const isDark = resolvedTheme === "dark";
+
+  const toggleTheme = () => {
+    setTheme(isDark ? "light" : "dark");
+  };
+
   return (
     <button
-    onClick={toggleTheme}
-    className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors"
-      title={isDark ? "التحويل للمظهر الفاتح" : "التحويل للمظهر الداكن"}
+      onClick={toggleTheme}
+      className="p-2 rounded-xl text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800 transition-colors cursor-pointer"
       aria-label="تبديل المظهر"
     >
-        {isDark ? (
+      {isDark ? (
         <Sun className="w-5 h-5 text-amber-400" />
       ) : (
         <Moon className="w-5 h-5 text-slate-600" />
       )}
     </button>
-  )
-}
+  );
+};
 
-export default ThemeToggle
+export default ThemeToggle;

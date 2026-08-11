@@ -19,7 +19,7 @@ export default async function RootLayout({
   const session = await auth();
   const user = session?.user;
   const initialUser = { name: user?.name, email: user?.email };
-  
+
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body
