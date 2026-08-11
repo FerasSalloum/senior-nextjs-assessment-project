@@ -14,17 +14,15 @@ export const Project = async ({ project }: { project: ProjectProbs }) => {
   const tasks = await taskservice.gitProjectTaske(project.id);
   return (
     <Link
-    href={`projects/${project.id}`}
+    href={`project/${project.id}`}
       className="group relative bg-[#131825]/90 border border-slate-800/80 hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-200 flex flex-col justify-start shadow-lg overflow-hidden cursor-pointer"
     >
-      {/* الجزء العلوي: الأيقونة والعناوين */}
       <h3 className="text-base font-bold text-slate-100 mb-1">
         {project.title}
       </h3>
       <p className="text-xs text-slate-400 mb-6 line-clamp-2">
         {project.description}
       </p>
-      {/* قائمة المهام السارية */}
       <div className="space-y-3 pt-2 border-t border-slate-800/50">
         <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider block">
           المهام السارية
@@ -53,7 +51,6 @@ export const Project = async ({ project }: { project: ProjectProbs }) => {
                 </span>
               </div>
 
-              {/* الشارات المخصصة (Badge) */}
               {task.priroity == "LOW" && (
                 <span className="px-1.5 py-0.5 text-[10px] font-bold bg-green-500/20 text-green-400 rounded-md border border-green-500/30">
                   {"غير مهمة"}

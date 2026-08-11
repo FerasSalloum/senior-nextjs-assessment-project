@@ -24,7 +24,7 @@ const CreateTaskModal = ({
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("/api/tasks", {
+      const res = await axios.post(`/api/project/${projectId}/task`, {
         title: title,
         status: selectedStatus,
         priroity: selectedPriority,
@@ -65,7 +65,7 @@ const CreateTaskModal = ({
       </button>
 
       {isOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
+        <div className="fixed overflow-y-scroll  max-h-screen inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm pt-36 pb-2.5">
           <div className="bg-[#131825] border border-slate-800 rounded-2xl p-6 w-full max-w-md space-y-5 text-right shadow-2xl relative">
             <button
               onClick={() => setIsOpen(false)}
@@ -79,7 +79,7 @@ const CreateTaskModal = ({
             <form onSubmit={handleSubmit} className="space-y-4">
               <div>
                 <label className="block text-xs font-medium text-slate-400 mb-1">
-                  اسم المشروع
+                  اسم المهمة
                 </label>
                 <input
                   type="text"
@@ -304,7 +304,7 @@ const CreateTaskModal = ({
                   disabled={loading}
                   className="bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-bold px-5 py-2 rounded-xl text-sm transition-all disabled:opacity-50"
                 >
-                  {loading ? "جاري الحفظ..." : "حفظ المشروع"}
+                  {loading ? "جاري الحفظ..." : "حفظ المهمة"}
                 </button>
               </div>
             </form>

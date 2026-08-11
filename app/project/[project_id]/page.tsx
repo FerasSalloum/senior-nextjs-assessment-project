@@ -13,20 +13,20 @@ import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTas
 import { TaskService } from "@/src/domain/service/TaskService";
 import EditProjectModal from "@/src/components/UI/EditProjectModal";
 import DeletProjectModal from "@/src/components/UI/DeleteProjectModal";
+import TaskModal from "@/src/components/UI/TaskModal";
 
-type Params = Promise<{ id: string }>;
+type Params = Promise<{ project_id: string }>;
 
 export default async function ProjectPage({ params }: { params: Params }) {
-  const { id } = await params;
+  const { project_id } = await params;
   const session = await auth();
   const userId = session?.user?.id;
-  const userName = session?.user?.name;
   const projectRepository = new PrismaProjectRepository();
   const projectServer = new ProjectService(projectRepository);
   const taskRepository = new PrismaTaskRepsitroy();
   const taskServer = new TaskService(taskRepository);
-  const project = await projectServer.getProjectById(id);
-  const tasks = await taskServer.gitProjectTaske(id);
+  const project = await projectServer.getProjectById(project_id);
+  const tasks = await taskServer.gitProjectTaske(project_id);
   return (
     <div
       dir="rtl"
@@ -49,47 +49,14 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tasks.map((task) => (
-          <div
-            key={task.id}
-            className={`bg-[#131825] border border-slate-800/80 rounded-xl p-5 flex flex-col justify-between h-36 transition-all hover:border-slate-700/80 relative group ${
-              task.status == "DONE" ? "opacity-60" : ""
-            }`}
-          >
-            <div className="flex items-start justify-between gap-3">
-              <h3
-                className={`text-sm font-semibold text-slate-200 line-clamp-2 ${
-                  task.status == "DONE" ? "line-through text-slate-500" : ""
-                }`}
-              >
-                {task.title}
-              </h3>
-
-              {task.status == "DONE" ? (
-                <CheckCircle2 className="w-5 h-5 text-cyan-400 shrink-0" />
-              ) : (
-                <Link
-                  href={`/tasks/${task.id}`}
-                  className="text-slate-500 hover:text-slate-300 transition-colors"
-                >
-                  <ArrowLeft className="w-4 h-4 shrink-0" />
-                </Link>
-              )}
-            </div>
-
-            <div className="flex items-center gap-2 text-xs text-slate-400 pt-3 border-t border-slate-800/40">
-              <div className="w-5 h-5 rounded-full bg-slate-800 flex items-center justify-center shrink-0">
-                <User className="w-3 h-3 text-slate-400" />
-              </div>
-              <span>مسند إلى: {userName}</span>
-            </div>
-          </div>
+         <TaskModal task={task} projectId={project_id} key={task.id}/>
         ))}
-        <CreateTaskModal projectId={id} assigneeId={userId} />
+        <CreateTaskModal projectId={project_id} assigneeId={userId} />
       </div>
 
       <div className="flex items-center justify-between pt-6">
-        <EditProjectModal projectId={id} />
-        <DeletProjectModal projectId={id} />
+        <EditProjectModal projectId={project_id} />
+        <DeletProjectModal projectId={project_id} />
       </div>
     </div>
   );

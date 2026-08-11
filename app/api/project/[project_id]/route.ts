@@ -7,7 +7,7 @@ import { NextRequest, NextResponse } from "next/server";
 const projrectRepositry = new PrismaProjectRepository();
 const projectService = new ProjectService(projrectRepositry);
 
-type params = Promise<{ id: string }>;
+type params = Promise<{ project_id: string }>;
 
 export const GET = async (
   request: NextRequest,
@@ -22,8 +22,8 @@ export const GET = async (
         { status: 401 },
       );
     }
-    const { id } = await params;
-    const project = await projectService.getProjectById(id);
+    const { project_id } = await params;
+    const project = await projectService.getProjectById(project_id);
     if (project.ownerId != userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -54,15 +54,15 @@ export const PATCH = async (
       );
     }
 
-    const { id } = await params;
-    const project = await projectService.getProjectById(id);
+    const { project_id } = await params;
+    const project = await projectService.getProjectById(project_id);
     if (project.ownerId != userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
         { status: 403 },
       );
     }
-    const existingProject = await projectService.getProjectById(id);
+    const existingProject = await projectService.getProjectById(project_id);
     if (!existingProject) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -91,7 +91,7 @@ export const PATCH = async (
       );
     }
     const updatePRoject = await projectService.updateProject(
-      id,
+      project_id,
       validated.data,
     );
     return NextResponse.json(
@@ -120,22 +120,22 @@ export const DELETE = async (
         { status: 401 },
       );
     }
-    const { id } = await params;
-    const project = await projectService.getProjectById(id);
+    const { project_id } = await params;
+    const project = await projectService.getProjectById(project_id);
     if (project.ownerId != userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
         { status: 401 },
       );
     }
-    const existingProject = await projectService.getProjectById(id);
+    const existingProject = await projectService.getProjectById(project_id);
     if (!existingProject) {
       return NextResponse.json(
         { error: "Unauthorized access" },
         { status: 403 },
       );
     }
-    await projectService.deleteProject(id);
+    await projectService.deleteProject(project_id);
 
     return NextResponse.json(
       { message: "Project removed successfully" },

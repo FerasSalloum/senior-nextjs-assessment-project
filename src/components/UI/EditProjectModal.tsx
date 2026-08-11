@@ -18,7 +18,7 @@ const EditProjectModal = ({projectId}:{projectId:string}) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.patch(`/api/projects/${projectId}`, {
+      const res = await axios.patch(`/api/project/${projectId}`, {
         title,
         description,
       });

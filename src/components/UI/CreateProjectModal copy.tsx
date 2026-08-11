@@ -18,7 +18,7 @@ const CreateProjectModal = () => {
     e.preventDefault();
     setLoading(true)
     try {
-      const res = await axios.post("/api/projects",{
+      const res = await axios.post("/api/project",{
         title,
         description
       })

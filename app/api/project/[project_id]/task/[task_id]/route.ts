@@ -2,30 +2,28 @@ import { auth } from "@/auth";
 import { TaskService } from "@/src/domain/service/TaskService";
 import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository copy";
 import { UpdateTaskSchema } from "@/src/validators/schemas";
-import jwt from "jsonwebtoken";
-import { cookies } from "next/headers";
 import { NextRequest, NextResponse } from "next/server";
 
 const taskRepository = new PrismaTaskRepsitroy();
 const taskService = new TaskService(taskRepository);
-const session =await auth()
 
-type Params = Promise<{ id: string }>;
+type Params = Promise<{ task_id: string }>;
 
 export const PATCH = async (
   request: NextRequest,
   { params }: { params: Params },
 ) => {
   try {
-    const userId =  session?.user?.id;
-    if (!userId) {
-      return NextResponse.json(
-        { error: "Unauthorized access" },
-        { status: 401 },
-      );
-    }
+    // const session =await auth()
+    // const userId =  session?.user?.id;
+    // if (!userId) {
+    //   return NextResponse.json(
+    //     { error: "Unauthorized access" },
+    //     { status: 401 },
+    //   );
+    // }
 
-    const { id } = await params;
+    const { task_id } = await params;
 
     let body = await request.json();
     if (typeof body === "string") {
@@ -48,7 +46,7 @@ export const PATCH = async (
     }
     if (validation.data.status) {
       const updatedTask = await taskService.updateTaskStatus(
-        id,
+        task_id,
         validation.data.status,
       );
       if (!updatedTask) {
@@ -74,7 +72,8 @@ export const DELETE = async (
   { params }: { params: Params },
 ) => {
   try {
-    const userId =  session?.user?.id;
+    const session = await auth();
+    const userId = session?.user?.id;
     if (!userId) {
       return NextResponse.json(
         { error: "Unauthorized access" },
@@ -82,16 +81,16 @@ export const DELETE = async (
       );
     }
 
-    const { id } = await params;
+    const { task_id } = await params;
 
-    await taskService.deletTaske(id);
+    await taskService.deletTaske(task_id);
 
     return NextResponse.json(
       { message: "Task deleted successfully" },
       { status: 200 },
     );
   } catch (error) {
-    console.error( error);
+    console.error(error);
     return NextResponse.json(
       { error: "Failed to delete task" },
       { status: 500 },
