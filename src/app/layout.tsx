@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import { Cairo } from "next/font/google";
 import "./globals.css";
 import ThemProvider from "@/src/components/ThemProvider"; // استدعاء المزود
-import Header from "../src/components/layout/Header";
-import Footer from "../src/components/layout/Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 import { auth } from "@/auth";
 
 const cairo = Cairo({ subsets: ["arabic"] });

@@ -1,9 +1,9 @@
 "use client";
 import { ArrowRight, RotateCcw } from "lucide-react";
 import Link from "next/link";
-import MainButoon from "../src/components/UI/MainButoon";
-import DarkButoon from "../src/components/UI/DarkButoon";
 import { useRouter } from "next/navigation";
+import MainButoon from "../components/UI/MainButoon";
+import DarkButoon from "../components/UI/DarkButoon";
 
 const Error = ({
   error,
