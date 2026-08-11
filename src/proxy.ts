@@ -12,7 +12,7 @@ export const proxy = async (request: NextRequest) => {
       return NextResponse.next();
     }
     if (isApiRoute) {
-      // return NextResponse.redirect(new URL("/login", request.url));
+      return NextResponse.redirect(new URL("/login", request.url));
     }
   }
   if (token) {
@@ -28,7 +28,7 @@ export const proxy = async (request: NextRequest) => {
       }
       return NextResponse.next();
     } catch (error) {
-      console.error("❌ Proxy Token Error:", error);
+      console.error(" Proxy Token Error:", error);
       return NextResponse.json(
         { error: "Unauthorized: Invalid or expired token" },
         { status: 401 },
