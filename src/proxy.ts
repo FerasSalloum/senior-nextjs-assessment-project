@@ -1,71 +1,47 @@
-import { jwtVerify } from "jose";
-import { NextRequest, NextResponse } from "next/server";
+import { auth } from "@/auth";
+import { NextResponse } from "next/server";
+// استبدل المسار أدناه بمسار ملف إعدادات NextAuth الخاص بك (مثلاً src/auth.ts)
 
-export const proxy = async (request: NextRequest) => {
-  const { pathname } = request.nextUrl;
-  const token = request.cookies.get("token")?.value;
+export const proxy = auth((req) => {
+  const { pathname } = req.nextUrl;
+  
+  // خاصية req.auth يوفرها NextAuth تلقائياً وتحتوي على بيانات المستخدم إذا كان مسجلاً للدخول
+  const isLoggedIn = !!req.auth; 
 
   const isAuthPage = pathname === "/login" || pathname === "/register";
   const isApiRoute = pathname.startsWith("/api");
 
-  // --- 1. حالة عدم وجود Token ---
-  if (!token) {
+  // --- 1. حالة المستخدم غير مسجل الدخول ---
+  if (!isLoggedIn) {
     if (isAuthPage) {
       return NextResponse.next(); // السماح بفتح صفحات الدخول والتسجيل
     }
     
     if (isApiRoute) {
       return NextResponse.json(
-        { error: "Unauthorized: No token provided" },
+        { error: "Unauthorized: Please log in" },
         { status: 401 }
       );
     }
     
-    // إذا حاول زيارة صفحة عادية (مثل الرئيسية أو المشاريع) -> تحويله لصفحة الدخول
-    return NextResponse.redirect(new URL("/login", request.url));
+    // توجيه المستخدم لصفحة الدخول إذا حاول زيارة صفحة محمية
+    return NextResponse.redirect(new URL("/login", req.url));
   }
 
-  // --- 2. حالة وجود Token (يجب التحقق منه) ---
-  try {
-    const secretKey = process.env.JWT_SECRET;
-    if (!secretKey) {
-      throw new Error("JWT_SECRET is not defined in environment variables");
-    }
-
-    const Key = new TextEncoder().encode(secretKey);
-    await jwtVerify(token, Key);
-
-    // التوكن سليم: إذا حاول فتح صفحة الدخول، أعده للرئيسية
+  // --- 2. حالة المستخدم مسجل الدخول بالفعل ---
+  if (isLoggedIn) {
+    // إذا حاول زيارة صفحة الدخول أو التسجيل، أعده إلى الصفحة الرئيسية
     if (isAuthPage) {
-      return NextResponse.redirect(new URL("/", request.url));
+      return NextResponse.redirect(new URL("/", req.url));
     }
-
-    // السماح بالمرور لأي صفحة أخرى
-    return NextResponse.next();
-    
-  } catch (error) {
-    console.error("Proxy Token Error:", error);
-
-    // إذا فشل التحقق (التوكن منتهي أو مزيف)
-    if (isApiRoute) {
-      const response = NextResponse.json(
-        { error: "Unauthorized: Invalid or expired token" },
-        { status: 401 }
-      );
-      // مسح الكوكي التالف
-      response.cookies.delete("token");
-      return response;
-    }
-
-    // إذا كانت صفحة ويب، قم بمسح التوكن التالف وتحويله لتسجيل الدخول
-    const response = NextResponse.redirect(new URL("/login", request.url));
-    response.cookies.delete("token");
-    return response;
   }
-};
 
+  // السماح بالمرور لأي صفحة أخرى
+  return NextResponse.next();
+});
+
+// تحديد المسارات التي يشتغل عليها الـ Proxy
 export const config = {
-  // أضفت لك مسارات المشاريع لضمان حمايتها
   matcher: [
     "/",
     "/project/:path*",
