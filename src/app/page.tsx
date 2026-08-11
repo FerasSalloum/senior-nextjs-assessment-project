@@ -5,7 +5,7 @@ import { PrismaProjectRepository } from "@/src/infrastructure/repositories/Prism
 import { ProjectService } from "@/src/domain/service/ProjectService";
 import { auth } from "@/auth";
 import { redirect } from "next/navigation";
-import CreateProjectModal from "@/src/components/UI/CreateProjectModal copy";
+import CreateProjectModal from "@/src/components/UI/CreateProjectModal";
 export const dyamic = "force-dyanimc";
 export const revlidate = 0;
 

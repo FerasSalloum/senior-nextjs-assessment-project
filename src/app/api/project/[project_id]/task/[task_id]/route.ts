@@ -1,6 +1,6 @@
 import { auth } from "@/auth";
 import { TaskService } from "@/src/domain/service/TaskService";
-import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository copy";
+import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository";
 import { UpdateTaskSchema } from "@/src/validators/schemas";
 import { NextRequest, NextResponse } from "next/server";
 

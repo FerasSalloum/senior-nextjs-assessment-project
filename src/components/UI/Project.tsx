@@ -1,5 +1,5 @@
 import { TaskService } from "@/src/domain/service/TaskService";
-import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository copy";
+import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository";
 import { CheckSquare, Square } from "lucide-react";
 import Link from "next/link";
 export interface ProjectProbs {
@@ -14,7 +14,7 @@ export const Project = async ({ project }: { project: ProjectProbs }) => {
   const tasks = await taskservice.gitProjectTaske(project.id);
   return (
     <Link
-    href={`project/${project.id}`}
+      href={`project/${project.id}`}
       className="group relative dark:bg-[#131825]/90 border dark:border-slate-800/80 dark:hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-200 flex flex-col justify-start shadow-lg overflow-hidden cursor-pointer"
     >
       <h3 className="text-base font-bold dark:text-slate-100 mb-1">

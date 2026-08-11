@@ -1,11 +1,9 @@
-import {
-  ListTodo,
-  } from "lucide-react";
+import { ListTodo } from "lucide-react";
 import CreateTaskModal from "@/src/components/UI/CreateTaskModal";
 import { auth } from "@/auth";
 import { PrismaProjectRepository } from "@/src/infrastructure/repositories/PrismaProjectRepository";
 import { ProjectService } from "@/src/domain/service/ProjectService";
-import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository copy";
+import { PrismaTaskRepsitroy } from "@/src/infrastructure/repositories/PrismaTaskRepository";
 import { TaskService } from "@/src/domain/service/TaskService";
 import EditProjectModal from "@/src/components/UI/EditProjectModal";
 import DeletProjectModal from "@/src/components/UI/DeleteProjectModal";
@@ -45,7 +43,7 @@ export default async function ProjectPage({ params }: { params: Params }) {
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {tasks.map((task) => (
-         <TaskModal task={task} projectId={project_id} key={task.id}/>
+          <TaskModal task={task} projectId={project_id} key={task.id} />
         ))}
         <CreateTaskModal projectId={project_id} assigneeId={userId} />
       </div>

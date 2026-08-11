@@ -1,17 +1,34 @@
-Need to install the following packages:
-tree-node-cli@3.0.0
-Ok to proceed? (y) 
-project
+senior-nextjs-assessment-project
 ├── AGENTS.md
 ├── CLAUDE.md
 ├── README.md
 ├── app
-│   ├── favicon.ico
+│   ├── api
+│   │   ├── auth
+│   │   │   └── register
+│   │   │       └── route.ts
+│   │   └── project
+│   │       ├── [project_id]
+│   │       │   ├── route.ts
+│   │       │   └── task
+│   │       │       ├── [task_id]
+│   │       │       │   └── route.ts
+│   │       │       └── route.ts
+│   │       └── route.ts
+│   ├── error.tsx
 │   ├── globals.css
 │   ├── layout.tsx
-│   └── page.tsx
+│   ├── login
+│   │   └── page.tsx
+│   ├── not-found.tsx
+│   ├── page.tsx
+│   ├── project
+│   │   └── [project_id]
+│   │       └── page.tsx
+│   └── register
+│       └── page.tsx
+├── auth.ts
 ├── eslint.config.mjs
-├── next-env.d.ts
 ├── next.config.ts
 ├── package-lock.json
 ├── package.json
@@ -19,6 +36,7 @@ project
 ├── prisma
 │   └── schema.prisma
 ├── prisma.config.ts
+├── project
 ├── public
 │   ├── file.svg
 │   ├── globe.svg
@@ -26,10 +44,26 @@ project
 │   └── window.svg
 ├── skills-lock.json
 ├── src
+│   ├── components
+│   │   ├── ThemProvider.tsx
+│   │   ├── UI
+│   │   │   ├── CreateProjectModal copy.tsx
+│   │   │   ├── CreateTaskModal.tsx
+│   │   │   ├── DarkButoon.tsx
+│   │   │   ├── DeleteProjectModal.tsx
+│   │   │   ├── DeleteTaskModal.tsx
+│   │   │   ├── EditProjectModal.tsx
+│   │   │   ├── MainButoon.tsx
+│   │   │   ├── Project.tsx
+│   │   │   ├── TaskModal.tsx
+│   │   │   └── ThemeToggle.tsx
+│   │   └── layout
+│   │       ├── Footer.tsx
+│   │       └── Header.tsx
 │   ├── domain
 │   │   ├── repositories
 │   │   │   ├── IProjectRepository.ts
-│   │   │   ├── ITaskRepository copy.ts
+│   │   │   ├── ITaskRepository.ts
 │   │   │   └── IUserRepository.ts
 │   │   └── service
 │   │       ├── AuthService.ts
@@ -37,12 +71,14 @@ project
 │   │       └── TaskService.ts
 │   ├── infrastructure
 │   │   └── repositories
-│   │       ├── PrismaProjectRepository .ts
+│   │       ├── PrismaProjectRepository.ts
 │   │       ├── PrismaTaskRepository copy.ts
 │   │       └── PrismaUserRepository.ts
 │   ├── lib
 │   │   └── prisma.ts
+│   ├── proxy.ts
 │   └── validators
 │       └── schemas.ts
 ├── tree.txt
-└── tsconfig.json
+├── tsconfig.json
+└── types
